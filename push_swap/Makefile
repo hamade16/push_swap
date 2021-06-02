@@ -1,17 +1,17 @@
-NAME = push_swap.a
+NAME = push_swap
 
-SRC = *.c
+SRC = push_swap.c ft_atoi.c operations.c operations2.c opeeration_r.c
 
-OBJECT = $(SRC:.c=.o)
+OBJECT = push_swap.o ft_atoi.o operations.o operations2.o opeeration_r.o
 
-FLAG = gcc -Wall -Wextra -Werror -c
+FLAG = @gcc -Wall -Wextra -Werror -fsanitize=address
+
 
 all: $(NAME)
 
 $(NAME):
-	@$(FLAG) $(SRC)
-	@ar rc $(NAME) $(OBJECT)
-	@ranlib $(NAME)
+	@$(FLAG) $(SRC) -o $(NAME)
+
 
 clean:
 	@rm -f $(OBJECT)
