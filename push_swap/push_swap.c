@@ -3,7 +3,7 @@
 
 void	trois_al(stack *stack)
 {
-	if (stack->st_a[2] > stack->st_a[1])
+	if (stack->st_a[2] > stack->st_a[1] && stack->st_a[0] > stack->st_a[2])
 		swap_a(stack);
 	if (stack->st_a[2] > stack->st_a[1] && stack->st_a[1] > stack->st_a[0])
 	{
@@ -23,45 +23,119 @@ void	trois_al(stack *stack)
 
 void	five_al(stack *stack)
 {
-	push_b(stack);
-	push_b(stack);
+	int *tri;
+	int j;
+	int i;
+	int b;
+
+	j = 0;
+	i = 0;
+	tri = (int *)malloc((stack->st_p_a) * sizeof(int));
+	while (j < (stack->st_p_a))
+	{
+		tri[j] = stack->st_a[j];
+		j++;
+		z++;
+	}
+	while(i < (stack->st_p_a - 1))
+	{
+		j = i + 1;
+		while(j < stack->st_p_a)
+		{
+			if(tri[i] > tri[j])
+			{
+				b = tri[i];
+				tri[i] = tri[j];
+				tri[j] = b;
+			}
+			j++;
+		}
+		i++;
+	}
+	j = 0;
+	if (stack->st_a[stack->st_p_a - 1] == tri[0] || stack->st_a[stack->st_p_a - 1] == tri[1])
+	{
+		i = 0;
+		push_b(stack);
+		while (stack->st_p_a > 2)
+		{
+			if (stack->st_a[stack->st_p_a - 1 - i] == tri[0] || stack->st_a[stack->st_p_a - 1 - i] == tri[1])
+			{
+				if (i == 0)
+				{
+					push_b(stack);
+					break;
+				}
+				else
+				{
+					ra(stack);
+					push_b(stack);
+					break;
+				}
+			}
+			if (stack->st_a[j] == tri[0] || stack->st_a[j] == tri[1])
+			{
+				if (j == 0)
+				{
+					rra(stack);
+					push_b(stack);
+				}
+				else
+				{
+					rra(stack);
+					rra(stack);
+					push_b(stack);
+				}
+			}
+			i++;
+			j++;
+		}
+	}
+	else
+	{
+		i = 1;
+		while (stack->st_p_a > 2)
+		{
+			if (stack->st_a[stack->st_p_a - 1 - i] == tri[0] || stack->st_a[stack->st_p_a - 1 - i] == tri[1])
+			{
+				if (i == 1)
+				{
+					ra(stack);
+					push_b(stack);
+				}
+				else
+				{
+					ra(stack);
+					ra(stack);
+					push_b(stack);
+				}
+				i--;
+			}
+			if(stack->st_a[j] == tri[0] || stack->st_a[j] == tri[1])
+			{
+				if (j == 0)
+				{
+					rra(stack);
+					push_b(stack);
+				}
+				else
+				{
+					rra(stack);
+					rra(stack);
+					push_b(stack);
+				}
+				i--;
+			}
+			i++;
+			j++;
+		}
+	}
+	if (stack->st_b[1] < stack->st_b[0])
+		swap_b(stack);
 	trois_al(stack);
 	push_a(stack);
-	if(stack->st_a[stack->st_p_a - 1] > stack->st_a[0])
-		ra(stack);
-	if (stack->st_a[stack->st_p_a - 1] < stack->st_a[0] && stack->st_a[stack->st_p_a - 1] > stack->st_a[1])
-	{
-		swap_a(stack);
-		push_b(stack);
-		swap_a(stack);
-		push_a(stack);
-	}
-	if (stack->st_a[stack->st_p_a - 1] < stack->st_a[1] && stack->st_a[stack->st_p_a - 1] > stack->st_a[2])
-	{
-		swap_a(stack);
-	}
 	push_a(stack);
-	if(stack->st_a[stack->st_p_a - 1] > stack->st_a[0])
-		ra(stack);
-		if (stack->st_a[stack->st_p_a - 1] < stack->st_a[0] && stack->st_a[stack->st_p_a - 1] > stack->st_a[1])
-	{
-		swap_a(stack);
-		push_b(stack);
-		swap_a(stack);
-		push_b(stack);
-		swap_a(stack);
-		push_a(stack);
-		push_a(stack);
-	}
-	if (stack->st_a[stack->st_p_a - 1] < stack->st_a[1] && stack->st_a[stack->st_p_a - 1] > stack->st_a[2])
-	{
-		swap_a(stack);
-		push_b(stack);
-		swap_a(stack);
-		push_a(stack);
-	}
-	if(stack->st_a[stack->st_p_a - 1] < stack->st_a[2] && stack->st_a[stack->st_p_a - 1] > stack->st_a[3])
-		swap_a(stack);
+	i = 0;
 }
 
 int		main(int argc, char **argv)
@@ -88,10 +162,12 @@ int		main(int argc, char **argv)
 	//ra(&stack);
 	//rb(&stack);
 	//rrr(&stack);
-	if (argc == 4)
+	/*if (argc == 4)
 		trois_al(&stack);
 	if (argc == 6)
-		five_al(&stack);
+		five_al(&stack);*/
+	five_al(&stack);
+	//push_swap(&stack);
 	i = stack.st_p_a - 1;
 	while(i >= 0)
 	{

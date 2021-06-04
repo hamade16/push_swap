@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <unistd.h>
 
 typedef struct stackElement
 {
@@ -27,5 +28,6 @@ void    rr(stack *stack);
 void    rrr(stack *stack);
 void	trois_al(stack *stack);
 void	five_al(stack *stack);
+void    push_swap(stack *stack);
 
 #endif

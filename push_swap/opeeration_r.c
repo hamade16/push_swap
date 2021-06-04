@@ -15,6 +15,7 @@ int ra(stack *stack)
         stack->st_a[j - 1] = b;
         j--;
     }
+    write (1, "ra\n", 3);
     return (1);
 }
 
@@ -33,6 +34,7 @@ int rb(stack *stack)
         stack->st_b[j - 1] = b;
         j--;
     }
+    write (1, "rb\n", 3);
     return (1);
 }
 
@@ -51,6 +53,7 @@ int rra(stack *stack)
         stack->st_a[j + 1] = a;
         j++;
     }
+    write (1, "rra\n", 4);
     return(1);
 }
 
@@ -69,5 +72,6 @@ int rrb(stack *stack)
         stack->st_b[j + 1] = a;
         j++;
     }
+    write (1, "rrb\n", 4);
     return(1);
 }

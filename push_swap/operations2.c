@@ -8,6 +8,7 @@ int push_b(stack *stack)
    stack->st_b[stack->st_p_b] = stack->st_a[stack->st_p_a - 1];
     stack->st_p_a--;
     stack->st_p_b++;
+    write (1, "pb\n", 3);
     return(1);
 }
 
@@ -18,6 +19,7 @@ int push_a(stack *stack)
     stack->st_a[stack->st_p_a] = stack->st_b[stack->st_p_b - 1];
     stack->st_p_b--;
     stack->st_p_a++;
+    write (1, "pa\n", 3);
     return(1);
 }
 

@@ -1,8 +1,8 @@
 NAME = push_swap
 
-SRC = push_swap.c ft_atoi.c operations.c operations2.c opeeration_r.c
+SRC = push_swap.c ft_atoi.c operations.c operations2.c opeeration_r.c tst.c
 
-OBJECT = push_swap.o ft_atoi.o operations.o operations2.o opeeration_r.o
+OBJECT = push_swap.o ft_atoi.o operations.o operations2.o opeeration_r.o tst.o
 
 FLAG = @gcc -Wall -Wextra -Werror -fsanitize=address
 
