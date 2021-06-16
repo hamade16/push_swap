@@ -27,15 +27,16 @@ void	five_al(stack *stack)
 	int j;
 	int i;
 	int b;
+	int z;
 
 	j = 0;
 	i = 0;
+	z = 0;
 	tri = (int *)malloc((stack->st_p_a) * sizeof(int));
 	while (j < (stack->st_p_a))
 	{
 		tri[j] = stack->st_a[j];
 		j++;
-		z++;
 	}
 	while(i < (stack->st_p_a - 1))
 	{
@@ -57,7 +58,7 @@ void	five_al(stack *stack)
 	{
 		i = 0;
 		push_b(stack);
-		while (stack->st_p_a > 2)
+		while (stack->st_p_a > 3)
 		{
 			if (stack->st_a[stack->st_p_a - 1 - i] == tri[0] || stack->st_a[stack->st_p_a - 1 - i] == tri[1])
 			{
@@ -94,20 +95,24 @@ void	five_al(stack *stack)
 	else
 	{
 		i = 1;
-		while (stack->st_p_a > 2)
+		while (stack->st_p_a > 3)
 		{
 			if (stack->st_a[stack->st_p_a - 1 - i] == tri[0] || stack->st_a[stack->st_p_a - 1 - i] == tri[1])
 			{
+				//printf ("%d", stack->st_p_a);
 				if (i == 1)
 				{
 					ra(stack);
 					push_b(stack);
+					z = 1;
 				}
 				else
 				{
 					ra(stack);
 					ra(stack);
 					push_b(stack);
+					z = 2;
+					//printf ("%d", stack->st_p_a);
 				}
 				i--;
 			}
@@ -115,19 +120,52 @@ void	five_al(stack *stack)
 			{
 				if (j == 0)
 				{
-					rra(stack);
-					push_b(stack);
+					if (z == 2)
+					{
+						ra(stack);
+						push_b(stack);
+					}
+					else if (z == 1)
+					{
+						rra(stack);
+						rra(stack);
+						push_b(stack);
+					}
+					
+					else
+					{
+						rra(stack);
+						push_b(stack);
+						j--;
+					}
 				}
 				else
 				{
-					rra(stack);
-					rra(stack);
-					push_b(stack);
+					if (z == 2)
+					{
+						push_b(stack);
+					}
+					else if(z == 1)
+					{
+						rra(stack);
+						rra(stack);
+						push_b(stack);
+					}
+					else 
+					{
+						rra(stack);
+						rra(stack);
+						push_b(stack);
+					}
+					i--;
 				}
-				i--;
 			}
 			i++;
 			j++;
+			if (stack->st_a[stack->st_p_a - 1] == tri[0] || stack->st_a[stack->st_p_a - 1] == tri[1])
+			{
+				push_b(stack);
+			}
 		}
 	}
 	if (stack->st_b[1] < stack->st_b[0])
@@ -135,7 +173,7 @@ void	five_al(stack *stack)
 	trois_al(stack);
 	push_a(stack);
 	push_a(stack);
-	i = 0;
+	free(tri);
 }
 
 int		main(int argc, char **argv)
@@ -167,13 +205,15 @@ int		main(int argc, char **argv)
 	if (argc == 6)
 		five_al(&stack);*/
 	five_al(&stack);
+	free(stack.st_a);
+	free(stack.st_b);
 	//push_swap(&stack);
-	i = stack.st_p_a - 1;
-	while(i >= 0)
-	{
-		printf ("%d\n", stack.st_a[i]);
-		i--;
-	}
+	// i = stack.st_p_a - 1;
+	// while(i >= 0)
+	// {
+	// 	printf ("%d\n", stack.st_a[i]);
+	// 	i--;
+	// }
 	/*if (is_empty_stack(sta))
 		printf("la pile est vide");*/
 	return 0;
